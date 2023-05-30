@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerkubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dockerkubernetes
+  template:
+    metadata:
+      labels:
+        app: dockerkubernetes
+    spec:
+      containers:
+      - name: dockerkubernetespersonal
+        image: juninhodevnet/dockerkubernetespersonal:dev
+        ports:
+        - containerPort: 8006
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
