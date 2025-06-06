@@ -1,4 +1,5 @@
 DockerKubernetesPersonal
+<br />
 Personal project using ASP.NET Core MVC, Docker, and Kubernetes to containerize and orchestrate a simple web application.
 
 📁 Project Structure
@@ -25,17 +26,13 @@ Kubernetes
 
 ⚙️ How to Run
 Docker
-bash
-Copiar
-Editar
+
 docker build -t docker-kubernetes-personal .
 docker run -d -p 5000:80 docker-kubernetes-personal
 Open: http://localhost:5000
 
 Kubernetes
-bash
-Copiar
-Editar
+
 kubectl apply -f dockerkubernetes-deploy.yml
 kubectl apply -f dockerkubernetes-service.yml
 kubectl get services
