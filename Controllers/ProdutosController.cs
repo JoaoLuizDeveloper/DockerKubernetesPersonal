@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DockerKubernetesPersonal.Data;
 using DockerKubernetesPersonal.Models;
@@ -19,14 +14,14 @@ namespace DockerKubernetesPersonal.Controllers
             _context = context;
         }
 
-        // GET: Produtoes
+        // GET: Products
         public async Task<IActionResult> Index()
         {
             var test = await _context.Produtos.ToListAsync();
-            return (IActionResult)test;
+            return View(test);
         }
 
-        // GET: Produtoes/Details/5
+        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Produtos == null)
@@ -44,15 +39,14 @@ namespace DockerKubernetesPersonal.Controllers
             return View(produto);
         }
 
-        // GET: Produtoes/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Produtoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // ValidateAntiForgeryToken is used to prevent CSRF attacks
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Preco,Descricao,Quantidade")] Produto produto)
@@ -83,8 +77,7 @@ namespace DockerKubernetesPersonal.Controllers
         }
 
         // POST: Produtoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // ValidateAntiForgeryToken is used to prevent CSRF attacks
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Preco,Descricao,Quantidade")] Produto produto)
@@ -136,6 +129,7 @@ namespace DockerKubernetesPersonal.Controllers
         }
 
         // POST: Produtoes/Delete/5
+        // ValidateAntiForgeryToken is used to prevent CSRF attacks
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -144,6 +138,7 @@ namespace DockerKubernetesPersonal.Controllers
             {
                 return Problem("Entity set 'DockerDbContext.Produtos'  is null.");
             }
+
             var produto = await _context.Produtos.FindAsync(id);
             if (produto != null)
             {
